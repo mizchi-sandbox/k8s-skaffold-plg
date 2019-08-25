@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 io.on("connection", socket => {
   console.log("a user connected", socket.id);
-  socket.broadcast.emit(`user connected`);
+  socket.broadcast.emit("msg");
 });
 
 http.listen(3000, () => {
