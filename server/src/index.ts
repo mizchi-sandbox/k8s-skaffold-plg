@@ -1,23 +1,27 @@
-// setup
 // @ts-ignore
 import dotenv from "dotenv-override";
 dotenv.config();
 
 import http from "http";
-
 import { createServer } from "./createServer";
 import { createSocketIo } from "./createSocketIo";
+import { buildSocket } from "../../packages/slink";
 
 const app = createServer();
 const server = http.createServer(app);
 const io = createSocketIo(server);
 
+const handlerMap = {
+  async foo(args: { id: string }) {
+    return "foo:" + args.id;
+  }
+};
+
 io.on("connection", socket => {
-  console.log("connected", socket);
-  // socket.emit("message", socket.id);
-  io.sockets.emit("message", socket.id);
-  // socket.broadcast.emit("message", socket.id);
-  // console.log("bloadcast", "message", socket.id);
+  socket.on("message", payload => {
+    console.log("[debug] message", payload);
+  });
+  buildSocket(socket, handlerMap);
 });
 
 // start
