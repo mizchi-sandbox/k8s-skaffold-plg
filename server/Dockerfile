@@ -4,6 +4,8 @@ WORKDIR /app
 EXPOSE 3000
 CMD ["npm", "run", "dev"]
 
-COPY package* ./
-RUN npm install
+COPY package.json ./
+COPY yarn.lock ./
+
+RUN yarn install
 COPY . .

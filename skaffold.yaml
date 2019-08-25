@@ -3,7 +3,7 @@ kind: Config
 build:
   artifacts:
     - image: gcr.io/mizchi-k8s-plg/node-example
-      context: backend
+      context: server
       sync:
         manual:
           # Sync all the javascript files that are in the src folder
