@@ -1,31 +1,16 @@
-import path from "path";
-import express from "express";
-import redisAdapter from "socket.io-redis";
-import session from "express-session";
-import cookieParser from "cookie-parser";
-import ConnectRedis from "connect-redis";
-import Http from "http";
-import SocketIo from "socket.io";
+// setup
+// @ts-ignore
+import dotenv from "dotenv-override";
+dotenv.config();
 
-// create app
-const app = express();
-// static
-app.use(express.static(path.join(__dirname, "../public")));
-app.use(cookieParser());
-// cookie
-const RedisStore = ConnectRedis(session);
-app.use(
-  session({
-    store: new RedisStore({}),
-    secret: "kashiesoaitasdisaodueoa",
-    resave: false
-  })
-);
+import http from "http";
 
-// socket.io
-const http = Http.createServer(app);
-const io = SocketIo(http);
-io.adapter(redisAdapter({ host: "localhost", port: 6379 }));
+import { createServer } from "./createServer";
+import { createSocketIo } from "./createSocketIo";
+
+const app = createServer();
+const server = http.createServer(app);
+const io = createSocketIo(server);
 
 io.on("connection", socket => {
   console.log("connected", socket.id);
@@ -33,6 +18,6 @@ io.on("connection", socket => {
 });
 
 // start
-http.listen(3000, () => {
+server.listen(3000, () => {
   console.log("listening on *:3000");
 });

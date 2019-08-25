@@ -6,7 +6,7 @@ const socket = io({
 socket.on("connect", () => {
   console.log("connected");
   socket.on("message", (msg: any) => {
-    console.log("receive msg", msg);
+    console.log("receive:", msg);
   });
 });
 

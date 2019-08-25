@@ -4,8 +4,9 @@ My k8s node websocket cluster playground
 
 - k8s
 - Skaffold
-- GKE
 - node / socket.io
+- GKE
+  - Cloud Memorystore
 
 ## How to use
 
@@ -24,10 +25,9 @@ skaffold dev
 
 ## TODO
 
-- dotenv
 - production
-- use cloud memorystore
 - session handling
+- HTTPS
 
 ## LICENSE
 

@@ -31,3 +31,6 @@ spec:
           image: gcr.io/mizchi-k8s-plg/node-example
           ports:
             - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: redishost
