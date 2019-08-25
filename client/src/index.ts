@@ -4,7 +4,7 @@ const socket = io({
 });
 
 socket.on("connect", () => {
-  console.log("connected");
+  console.log("connected", socket.id);
   socket.on("message", (msg: any) => {
     console.log("receive:", msg);
   });

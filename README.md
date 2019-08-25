@@ -3,7 +3,7 @@
 My k8s node websocket cluster playground
 
 - k8s
-- Skaffold
+- skaffold
 - node / socket.io
 - GKE
   - Cloud Memorystore
@@ -12,21 +12,38 @@ My k8s node websocket cluster playground
 
 Edit `gcr.io/gcr.io/mizchi-k8s-plg/node-example` to your uploadable endpoint.
 
-## Development
+## Development local
 
 ```bash
+# run redis
+docker-compose up -d
+
 # client
-cd client
-yarn dev # start webpack --watch
+cd client && yarn install && yarn dev # start webpack --watch
+
+# server
+cd server && yarn install && yarn dev # start nodemon
+```
+
+## Development on k8s
+
+```bash
+# client always local on dev
+cd client && yarn dev # start webpack --watch
 
 # server
 skaffold dev
 ```
 
+## Deployment
+
+```
+skaffold run
+```
+
 ## TODO
 
 - production
-- session handling
 - HTTPS
 
 ## LICENSE

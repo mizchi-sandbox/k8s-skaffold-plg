@@ -3,6 +3,8 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: app-ingress
+  # annotations:
+  #   kubernetes.io/ingress.global-static-ip-name: "test-ip"
 spec:
   rules:
     - http:

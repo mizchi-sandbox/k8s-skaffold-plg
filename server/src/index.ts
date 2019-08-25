@@ -13,8 +13,11 @@ const server = http.createServer(app);
 const io = createSocketIo(server);
 
 io.on("connection", socket => {
-  console.log("connected", socket.id);
-  socket.broadcast.emit("message", socket.id);
+  console.log("connected", socket);
+  // socket.emit("message", socket.id);
+  io.sockets.emit("message", socket.id);
+  // socket.broadcast.emit("message", socket.id);
+  // console.log("bloadcast", "message", socket.id);
 });
 
 // start
